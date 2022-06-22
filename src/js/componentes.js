@@ -30,7 +30,7 @@ txtInput.addEventListener('keyup', (event)=> {
     console.log({event});
     if(event.keyCode === 13 && txtInput.value.length > 0){
        const nuevoTodo = new Todo(txtInput.value);
-       todoList.nuevoTodo(nuevoTodo); 
+       todoList.newTodo(nuevoTodo); 
        createToDoHtml(nuevoTodo);
        txtInput.value = '';
     }
@@ -42,7 +42,7 @@ divTodoList.addEventListener('click', (event) => {
     const todoId = todoElement.getAttribute('data-id');
 
     if(elementName.includes('input')){
-        todoList.marcarCompletado(todoId);
+        todoList.checkCompleted(todoId);
         todoElement.classList.toggle('completed');
     }
 

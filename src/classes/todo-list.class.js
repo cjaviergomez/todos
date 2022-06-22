@@ -3,15 +3,15 @@ export class TodoList {
         this.todos = [];
     }
 
-    nuevoTodo(todo) {
+    newTodo(todo) {
         this.todos.push(todo);
     }
 
-    eliminarTodo(id) {
+    deleteTodo(id) {
         this.todos = this.todos.filter(todo => todo.id !== id);
     }
 
-    marcarCompletado(id) {
+    checkCompleted(id) {
         this.todos.forEach(todo => {
             if (todo.id == id) {
                 todo.complete = !todo.complete;
@@ -19,7 +19,7 @@ export class TodoList {
         });
     }
 
-    eliminarCompletados() {
+    deleteCompleted() {
         this.todos = this.todos.filter(todo => !todo.complete);
     }
 }
