@@ -52,11 +52,10 @@ divTodoList.addEventListener('click', (event) => {
 
 btnClearCompleted.addEventListener('click', () => {
     todoList.deleteCompleted();
-    const todos = divTodoList.querySelectorAll('li');
-    todos.forEach(todo => {
-        if(todo.classList.contains('completed')){
-            divTodoList.removeChild(todo);
+    for(let i = divTodoList.children.length -1; i >= 0; i--){
+        const element = divTodoList.children[i];
+        if(element.classList.contains('completed')){
+            divTodoList.removeChild(element);
         }
     }
-    )
 });
