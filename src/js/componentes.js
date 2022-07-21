@@ -4,6 +4,7 @@ import { todoList } from "../index";
 // Referencias al HTML
 const divTodoList = document.querySelector('.todo-list');
 const txtInput = document.querySelector('.new-todo');
+const btnClearCompleted = document.querySelector('.clear-completed');
 
 export const createToDoHtml = (todo) => {
     const todoHtml = `
@@ -27,7 +28,6 @@ export const createToDoHtml = (todo) => {
 
 // Events
 txtInput.addEventListener('keyup', (event)=> {
-    console.log({event});
     if(event.keyCode === 13 && txtInput.value.length > 0){
        const nuevoTodo = new Todo(txtInput.value);
        todoList.newTodo(nuevoTodo); 
@@ -44,7 +44,19 @@ divTodoList.addEventListener('click', (event) => {
     if(elementName.includes('input')){
         todoList.checkCompleted(todoId);
         todoElement.classList.toggle('completed');
+    } else if(elementName.includes('button')){
+        todoList.deleteTodo(todoId);
+        divTodoList.removeChild(todoElement);
     }
+});
 
-
+btnClearCompleted.addEventListener('click', () => {
+    todoList.deleteCompleted();
+    const todos = divTodoList.querySelectorAll('li');
+    todos.forEach(todo => {
+        if(todo.classList.contains('completed')){
+            divTodoList.removeChild(todo);
+        }
+    }
+    )
 });

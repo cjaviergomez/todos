@@ -8,7 +8,7 @@ export class TodoList {
     }
 
     deleteTodo(id) {
-        this.todos = this.todos.filter(todo => todo.id !== id);
+        this.todos = this.todos.filter(todo => todo.id != id);
     }
 
     checkCompleted(id) {

@@ -8,6 +8,5 @@ const task = new Todo('Learn JavaScript!!');
 
 todoList.newTodo(task);
 
-console.log({todoList});
 
 createToDoHtml(task);
