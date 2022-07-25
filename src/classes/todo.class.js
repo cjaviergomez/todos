@@ -15,13 +15,4 @@ export class Todo {
        this.complete = false;
        this.createAt = new Date();
     }
-
-    printInfo() {
-        console.log(`
-            Tarea: ${this.task}
-            ID: ${this.id}
-            Completado: ${this.complete}
-            Creado: ${this.createAt}
-        `);
-    }
 }

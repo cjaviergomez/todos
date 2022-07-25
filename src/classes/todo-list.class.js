@@ -23,6 +23,10 @@ export class TodoList {
         });
     }
 
+    getTotalPending() {
+        return this.todos.filter(todo => !todo.complete).length;
+    }
+
     deleteCompleted() {
         this.todos = this.todos.filter(todo => !todo.complete);
         this.saveLocalStorage();

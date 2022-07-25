@@ -5,12 +5,15 @@ import { todoList } from "../index";
 const divTodoList = document.querySelector('.todo-list');
 const txtInput = document.querySelector('.new-todo');
 const btnClearCompleted = document.querySelector('.clear-completed');
+const ulFilters = document.querySelector('.filters');
+const anchorFiltros = document.querySelectorAll('.filtro');
+const totalPending = document.querySelector('.total-pending');
 
 export const createToDoHtml = (todo) => {
     const todoHtml = `
         <li class="${ (todo.complete) ? 'completed' : ''}" data-id="${ todo.id }">
 			<div class="view">
-				<input class="toggle" type="checkbox" ${ (todo.complete) ? 'checked' : ''}">
+				<input class="toggle" type="checkbox" ${ (todo.complete) ? 'checked' : ''}>
 				<label>${todo.task}</label>
 				<button class="destroy"></button>
 			</div>
@@ -22,6 +25,8 @@ export const createToDoHtml = (todo) => {
     div.innerHTML = todoHtml;
 
     divTodoList.append(div.firstElementChild);
+
+    refreshTotal();
 
     return div.firstElementChild;
 }
@@ -48,6 +53,7 @@ divTodoList.addEventListener('click', (event) => {
         todoList.deleteTodo(todoId);
         divTodoList.removeChild(todoElement);
     }
+    refreshTotal();
 });
 
 btnClearCompleted.addEventListener('click', () => {
@@ -59,3 +65,31 @@ btnClearCompleted.addEventListener('click', () => {
         }
     }
 });
+
+ulFilters.addEventListener('click', (event) => {
+    const filter = event.target.text;
+    if(!filter) return;
+
+    anchorFiltros.forEach(element => element.classList.remove('selected'));
+    event.target.classList.add('selected');
+
+    for(const element of divTodoList.children){
+        element.classList.remove('hidden');
+        const completed = element.classList.contains('completed');
+
+        switch(filter){
+            case 'Pendientes':
+                if(completed) element.classList.add('hidden');
+            break;
+            case 'Completados':
+                if(!completed) element.classList.add('hidden');
+            break;
+    
+        }
+    }   
+});
+
+const refreshTotal = () => {
+    totalPending.innerHTML = todoList.getTotalPending();
+}
+
